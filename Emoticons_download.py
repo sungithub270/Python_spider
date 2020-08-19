@@ -108,3 +108,5 @@ def download(folder="bqb",pages=int(input("请输入要爬取的数量："))):
     
 if __name__ == "__main__":
     download()
+    
+    
