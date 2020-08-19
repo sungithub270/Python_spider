@@ -1,3 +1,3 @@
 # Python_spider
 
-Python爬虫练习项目
+Python爬虫练习仓库
