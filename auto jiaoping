@@ -1,0 +1,148 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.keys import Keys
+import random
+
+
+
+
+def login(uesr,pwd):  #模拟登陆
+
+    url = 'http://jwgl.wfmc.edu.cn/jsxsd/xspj/xspj_find.do'
+
+    driver.get(url)
+    driver.find_element_by_xpath('//*[@id="userAccount"]').send_keys(user)
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="userPassword"]').send_keys(pwd)
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="ul1"]/li[5]/button').click()
+    time.sleep(2)
+    eva()
+
+
+
+
+
+def eva():
+
+
+    driver.execute_script('window.open()')
+    windows = driver.window_handles
+    driver.switch_to.window(windows[1])
+    driver.get('http://jwgl.wfmc.edu.cn/jsxsd/xspj/xspj_find.do')
+
+    driver.find_element_by_xpath('//*[@id="Form1"]/table/tbody/tr[2]/td[7]/a').click()
+    time.sleep(2)
+
+    #进入评价
+
+
+    for i in range (99):
+
+
+
+        try:
+
+            f0()
+
+        except:
+
+            driver.find_element_by_xpath('//*[@id="PagingControl1_btnNextPage"]').click()
+
+
+        continue
+
+
+
+
+
+
+
+def f0():
+
+    driver.find_element_by_link_text('评价').click()
+
+    tianxie()
+
+    time.sleep(1)
+
+    tijiao()
+
+    time.sleep(1)
+
+
+
+
+def tianxie():
+
+    driver.find_element_by_xpath('//*[@id="pj0601id_7_1"]').click()
+    driver.find_element_by_xpath('//*[@id="pj0601id_6_1"]').click()
+    driver.find_element_by_xpath('//*[@id="pj0601id_2_1"]').click()
+    driver.find_element_by_xpath('//*[@id="pj0601id_4_1"]').click()
+    driver.find_element_by_xpath('//*[@id="pj0601id_1_1"]').click()
+    driver.find_element_by_xpath('//*[@id="pj0601id_5_1"]').click()
+    driver.find_element_by_xpath('//*[@id="pj0601id_3_2"]').click()
+
+    pingyu = ['老师讲的很好，谢谢老师', '课堂氛围活跃', '老师与学生互动很好', '谢谢老师，课堂体验很好']
+
+    driver.find_element_by_xpath('//*[@id="jynr"]').clear()
+    driver.find_element_by_xpath('//*[@id="jynr"]').send_keys(str(random.choice(pingyu)))
+
+
+
+
+def tijiao():
+
+    driver.find_element_by_xpath('//*[@id="tj"]').click()
+
+    time.sleep(1)
+
+    alert = driver.switch_to_alert()
+    alert.accept()
+
+    time.sleep(3)
+
+    alert2 = driver.switch_to_alert()
+    alert.accept()
+
+    time.sleep(3)
+
+
+
+
+
+
+def fuc1(i):
+
+    for c in range(i):
+        driver.find_element_by_xpath('//*[@id="PagingControl1_btnNextPage"]').click()
+        time.sleep(2)
+    pingjia0()
+
+    for c in range(i):
+        driver.find_element_by_xpath('//*[@id="PagingControl1_btnNextPage"]').click()
+        time.sleep(2)
+    pingjia1()
+
+    for c in range(i):
+        driver.find_element_by_xpath('//*[@id="PagingControl1_btnNextPage"]').click()
+        time.sleep(2)
+    pingjia2()
+
+    for c in range(i):
+        driver.find_element_by_xpath('//*[@id="PagingControl1_btnNextPage"]').click()
+        time.sleep(2)
+    pingjia3()
+
+
+
+
+if __name__ == '__main__':
+    user = '*******'
+    pwd =  '*******'
+    chrome_options = webdriver.ChromeOptions()
+    prefs = {"profile.managed_default_content_settings.images": 2}
+    chrome_options.add_experimental_option("prefs", prefs)
+    driver = webdriver.Chrome(chrome_options=chrome_options)
+    login(user, pwd)
